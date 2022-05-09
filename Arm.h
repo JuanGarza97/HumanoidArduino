@@ -19,6 +19,7 @@ class Arm: public HumanoidObject
 		void goToCurrent();
 		void move(int positionsNum, int positions[][MAX_SERVO_NUM], float movementSpeed, float milInTick, int Total_Ticks);
 	private:
+		int servoPosition = 0;
 		int servosLength = 0;
 		Servo servos[MAX_SERVO_NUM];
 		int *_pins;

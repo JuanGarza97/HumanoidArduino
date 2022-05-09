@@ -22,14 +22,12 @@ void Arm::move(int positionsNum, int positions[][MAX_SERVO_NUM], float movementS
 	currentPosition = positions[Total_Ticks];
 	futurePosition = (Total_Ticks + 1 < positionsNum) ? positions[Total_Ticks + 1] : positions[Total_Ticks];
 
-	int servoPosition[MAX_SERVO_NUM];
 	for(int i = 0; i < servosLength;i++)
 	{
 		if (currentPosition[i] > futurePosition[i])
-		servoPosition[i] = currentPosition[i] - (((currentPosition[i] - futurePosition[i]) / movementSpeed) * milInTick);
+			servoPosition = currentPosition[i] - (((currentPosition[i] - futurePosition[i]) / movementSpeed) * milInTick);
 		else
-		servoPosition[i] = currentPosition[i] + (((futurePosition[i] - currentPosition[i]) / movementSpeed) * milInTick);
+			servoPosition = currentPosition[i] + (((futurePosition[i] - currentPosition[i]) / movementSpeed) * milInTick);
+		servos[i].write(servoPosition);
 	}
-
-	writeServos(servoPosition);
 }

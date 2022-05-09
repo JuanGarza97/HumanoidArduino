@@ -12,6 +12,11 @@ Head::Head(int *pins, int servosLength) : HumanoidObject(pins, servos, servosLen
 	this->servosLength = servosLength;
 }
 
+void Head::goToCurrent()
+{
+	writeServos(currentPosition);
+}
+
 void Head::move(int positionsNum, int positions[][MAX_SERVO_NUM], float movementSpeed, float milInTick, int Total_Ticks)
 {
 	currentPosition = positions[Total_Ticks];
@@ -26,8 +31,5 @@ void Head::move(int positionsNum, int positions[][MAX_SERVO_NUM], float movement
 			servoPosition[i] = currentPosition[i] + (((futurePosition[i] - currentPosition[i]) / movementSpeed) * milInTick);
 	}
 
-	for(int i = 0; i < servosLength; i++) 
-	{
-		servos[i].write(servoPosition[i]);
-	}
+	writeServos(servoPosition);
 }

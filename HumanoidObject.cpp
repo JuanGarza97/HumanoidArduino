@@ -19,6 +19,12 @@ void HumanoidObject::setDefaults(int *degrees)
 	defaultPositions = degrees;
 }
 
+void HumanoidObject::writeServos(int *degrees)
+{
+	for(int i = 0; i < servosLength; i++)
+		servos[i].write(*(degrees + i));
+}
+
 void HumanoidObject::attachServos()
 {
 	for(int i = 0; i < servosLength;i++)
@@ -35,12 +41,7 @@ void HumanoidObject::detachServos()
 	}
 }
 
-void HumanoidObject::gotoDefault(bool detach)
+void HumanoidObject::gotoDefault()
 {
-	for(int i = 0; i < servosLength; i++)
-	{
-		servos[i].write(*(defaultPositions + i));
-		if(detach)
-		servos[i].detach();
-	}
+	writeServos(defaultPositions);
 }

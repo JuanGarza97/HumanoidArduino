@@ -11,6 +11,9 @@
 #include "Head.h"
 #include "Arm.h"
 
+#define MAX_SERVOS_HEAD 2
+#define MAX_SERVOS_ARM 4
+
 class Humanoid
 {
   public:
@@ -22,11 +25,11 @@ class Humanoid
 	void attachServos();
     void clock(float t);
 	void toDefault();
-	bool move(int positions, int headPositions[][2]);
-	bool move(int positions, int armPositions[][4]);
-	bool move(int positions, int rightArmPositions[][4], int leftArmPositions[][4]);
-	bool move(int positions, int headPositions[][2], int armPositions[][4]);
-    bool move(int positions, int headPositions[][2], int rightArmPositions[][4], int leftArmPositions[][4]);
+	bool move(int positions, int headPositions[][MAX_SERVOS_HEAD]);
+	bool move(int positions, int armPositions[][MAX_SERVOS_ARM]);
+	bool move(int positions, int rightArmPositions[][MAX_SERVOS_ARM], int leftArmPositions[][MAX_SERVOS_ARM]);
+	bool move(int positions, int headPositions[][MAX_SERVOS_HEAD], int armPositions[][MAX_SERVOS_ARM]);
+    bool move(int positions, int headPositions[][MAX_SERVOS_HEAD], int rightArmPositions[][MAX_SERVOS_ARM], int leftArmPositions[][MAX_SERVOS_ARM]);
     void resetTime();
 	void defaultPosition();
   private:

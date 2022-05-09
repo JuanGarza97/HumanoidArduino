@@ -15,10 +15,11 @@ class HumanoidObject
 	public:
 		HumanoidObject(int *pins, Servo *servos, int = 2);
 		void setDefaults(int *degrees);
-		void gotoDefault(bool = false);
+		void gotoDefault();
 		void printDefaults();
 		void attachServos();
 		void detachServos();
+		void writeServos(int *degrees);
 	private:
 		int servosLength = 0;
 		Servo *servos;

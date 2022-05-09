@@ -12,6 +12,11 @@ Arm::Arm(int *pins, int servosLength) : HumanoidObject(pins, servos, servosLengt
 	this->servosLength = servosLength;
 }
 
+void Arm::goToCurrent()
+{
+	writeServos(currentPosition);
+}
+
 void Arm::move(int positionsNum, int positions[][MAX_SERVO_NUM], float movementSpeed, float milInTick, int Total_Ticks)
 {
 	currentPosition = positions[Total_Ticks];
@@ -26,8 +31,5 @@ void Arm::move(int positionsNum, int positions[][MAX_SERVO_NUM], float movementS
 		servoPosition[i] = currentPosition[i] + (((futurePosition[i] - currentPosition[i]) / movementSpeed) * milInTick);
 	}
 
-	for(int i = 0; i < servosLength; i++)
-	{
-		servos[i].write(servoPosition[i]);
-	}
+	writeServos(servoPosition);
 }

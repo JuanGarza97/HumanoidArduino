@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map Humanoid#######################################
+
+
+#######################################
+Datatypes (KEYWORD1)
+#######################################
+
+Humanoid	KEYWORD1
+HumanoidObject	KEYWORD1
+Head	KEYWORD1
+Arm	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+clock	KEYWORD2
+move	KEYWORD2
+resetTime	KEYWORD2
+setDefaults	KEYWORD2
+attachServos	KEYWORD2
+defaultPosition	KEYWORD2
+
+#######################################
+#

@@ -7,10 +7,11 @@
 #include "HumanoidObject.h"
 #include "Servo.h"
 
-HumanoidObject::HumanoidObject(int *pins, Servo *servos, int servosLength)
+HumanoidObject::HumanoidObject(int* pins, Servo* servos, int* currentPositions, int servosLength)
 {
 	this->servosLength = servosLength;
 	this->servos = servos;
+	this->currentPositions = currentPositions;
 	_pins = pins;
 }
 
@@ -22,7 +23,10 @@ void HumanoidObject::setDefaults(int *degrees)
 void HumanoidObject::writeServos(int *degrees)
 {
 	for(int i = 0; i < servosLength; i++)
+	{
 		servos[i].write(*(degrees + i));
+		Serial.println(degrees[i]);
+	}
 }
 
 void HumanoidObject::attachServos()
@@ -41,7 +45,12 @@ void HumanoidObject::detachServos()
 	}
 }
 
-void HumanoidObject::gotoDefault()
+void HumanoidObject::goToDefault()
 {
 	writeServos(defaultPositions);
+}
+
+void HumanoidObject::goToCurrent()
+{
+	writeServos(currentPositions);
 }

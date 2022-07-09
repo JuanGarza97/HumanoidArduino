@@ -13,10 +13,10 @@
 class HumanoidObject
 {
 	public:
-		HumanoidObject(int *pins, Servo *servos, int = 2);
+		HumanoidObject(int *pins, Servo *servos, int* currentPositions, int = 2);
 		void setDefaults(int *degrees);
-		void gotoDefault();
-		void printDefaults();
+		void goToDefault();
+		void goToCurrent();
 		void attachServos();
 		void detachServos();
 		void writeServos(int *degrees);
@@ -25,8 +25,8 @@ class HumanoidObject
 		Servo *servos;
 		int *_pins;
 		int *defaultPositions;
-		int *currentPosition;
-		int *futurePosition;
+		int *currentPositions;
+		int *futurePositions;
 
 };
 #endif

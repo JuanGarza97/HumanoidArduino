@@ -70,11 +70,11 @@ void Humanoid::attachServos()
 void Humanoid::defaultPosition()
 {
 	if(_head != NULL)
-	_head->gotoDefault();
+	_head->goToDefault();
 	if(_rightArm != NULL)
-	_rightArm->gotoDefault();
+	_rightArm->goToDefault();
 	if(_leftArm != NULL)
-	_leftArm->gotoDefault();
+	_leftArm->goToDefault();
 }
 
 
@@ -83,13 +83,14 @@ bool Humanoid::move(int positions, int headPositions[][MAX_SERVOS_HEAD], int rig
   if(_head == NULL || _rightArm == NULL || _leftArm	== NULL) return false;
   
   resetTime();
-  while(positionIndex + 1< positions)
+  while(positionIndex + 1 < positions)
   {
     clock(_movementSpeed);
     _head->move(positions, headPositions, _movementSpeed, milInTick, positionIndex);
 	_rightArm->move(positions, rightArmPositions, _movementSpeed, milInTick, positionIndex);
 	_leftArm->move(positions, leftArmPositions, _movementSpeed, milInTick, positionIndex);
   }
+  Serial.println("Go To Current");
   _head->goToCurrent();
   _rightArm->goToCurrent();
   _leftArm->goToCurrent();
@@ -101,7 +102,7 @@ bool Humanoid::move(int positions, int headPositions[][MAX_SERVOS_HEAD],int armP
 	if(_head == NULL || _rightArm == NULL) return false;
 	
 	resetTime();
-	while(positionIndex + 1< positions)
+	while(positionIndex + 1 < positions)
 	{
 		clock(_movementSpeed);
 		_head->move(positions, headPositions, _movementSpeed, milInTick, positionIndex);
@@ -117,7 +118,7 @@ bool Humanoid::move(int positions, int rightArmPositions[][MAX_SERVOS_ARM], int 
 	if(_rightArm == NULL || _leftArm == NULL) return false;
 	
 	resetTime();
-	while(positionIndex + 1< positions)
+	while(positionIndex + 1 < positions)
 	{
 		clock(_movementSpeed);
 		_rightArm->move(positions, rightArmPositions, _movementSpeed, milInTick, positionIndex);
@@ -133,7 +134,7 @@ bool Humanoid::move(int positions, int headPositions[][MAX_SERVOS_HEAD])
 	if(_head == NULL) return false;
 	
 	resetTime();
-	while(positionIndex + 1< positions)
+	while(positionIndex + 1 < positions)
 	{
 		clock(_movementSpeed);
 		_head->move(positions, headPositions, _movementSpeed, milInTick, positionIndex);
@@ -147,7 +148,7 @@ bool Humanoid::move(int positions, int armPositions[][MAX_SERVOS_ARM])
 	if(_rightArm == NULL) return false;
 	
 	resetTime();
-	while(positionIndex + 1< positions)
+	while(positionIndex + 1 < positions)
 	{
 		clock(_movementSpeed);
 		_rightArm->move(positions, armPositions, _movementSpeed, milInTick, positionIndex);

@@ -7,27 +7,20 @@
 #include "Arm.h"
 #include "Servo.h"
 
-Arm::Arm(int *pins, int servosLength) : HumanoidObject(pins, servos, servosLength)
-{
-	this->servosLength = servosLength;
-}
-
-void Arm::goToCurrent()
-{
-	writeServos(currentPosition);
-}
+Arm::Arm(int *pins) : HumanoidObject(pins, servos, currentPositions, MAX_SERVO_NUM){}
 
 void Arm::move(int positionsNum, int positions[][MAX_SERVO_NUM], float movementSpeed, float milInTick, int Total_Ticks)
 {
-	currentPosition = positions[Total_Ticks];
-	futurePosition = (Total_Ticks + 1 < positionsNum) ? positions[Total_Ticks + 1] : positions[Total_Ticks];
+	currentPositions = positions[Total_Ticks];
+	futurePositions = (Total_Ticks + 1 < positionsNum) ? positions[Total_Ticks + 1] : positions[Total_Ticks];
 
-	for(int i = 0; i < servosLength;i++)
+	int servoPosition = 0;
+	for(int i = 0; i < MAX_SERVO_NUM; i++)
 	{
-		if (currentPosition[i] > futurePosition[i])
-			servoPosition = currentPosition[i] - (((currentPosition[i] - futurePosition[i]) / movementSpeed) * milInTick);
+		if (currentPositions[i] > futurePositions[i])
+			servoPosition = currentPositions[i] - (((currentPositions[i] - futurePositions[i]) / movementSpeed) * milInTick);
 		else
-			servoPosition = currentPosition[i] + (((futurePosition[i] - currentPosition[i]) / movementSpeed) * milInTick);
+			servoPosition = currentPositions[i] + (((futurePositions[i] - currentPositions[i]) / movementSpeed) * milInTick);
 		servos[i].write(servoPosition);
 	}
 }
